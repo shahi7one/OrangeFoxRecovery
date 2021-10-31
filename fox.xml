@@ -4,9 +4,7 @@
 <!-- OrangeFox Recovery Manifest -->
 <!-- Oreo | 2018-2019 | R10.0 -->
 
-    <remote name="fox"
-            fetch="https://gitlab.com/OrangeFox/"
-            revision="refs/tags/R10.0" />
+<remote name="fox" fetch="https://gitlab.com/OrangeFox/" revision="R9.0" />
 
 
 <!-- Remove unused projects -->
