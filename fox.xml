@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+<!-- OrangeFox Recovery Manifest -->
+<!-- Oreo | 2018-2019 | R10.0 -->
+
+<remote name="fox" fetch="https://gitlab.com/OrangeFox/" revision="R10.0" />
+
+<!-- Remove unused projects -->
+    <remove-project name="platform/bootable/recovery" />
+    <remove-project name="android_build"/>
+    <!--remove-project name="android_external_f2fs-tools"/-->
+    <remove-project name="android"/>    
+    <remove-project name="platform/external/dlmalloc"/>    
+
+<!-- Add forked projects -->
+    <project name="bootable/recovery" path="bootable/recovery" remote="fox" revision="fox_9.0" />
+    <project name="vendor/recovery" path="vendor/recovery" remote="fox" revision="master" />
+    <project name="build/make" path="build/make" revision="fox_8.1" remote="fox" >
+        <copyfile src="core/root.mk" dest="Makefile" />
+        <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+        <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+        <linkfile src="core" dest="build/core" />
+        <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+        <linkfile src="target" dest="build/target" />
+        <linkfile src="tools" dest="build/tools" />
+    </project>
+    <project name="platform/external/dlmalloc" path="external/dlmalloc" remote="fox" />
+    <!--project name="f2fs-tools" path="external/f2fs-tools" remote="fox" /-->
+
+<!-- The following directories are actually needed from android_frameworks_base (for FBE decryption)
+     * frameworks/base/core/java/android/content   (~4MB)
+     * frameworks/base/core/java/android/security  (<1MB) -->
+    <!--project path="TeamWin/.repo/frameworks/base" name="android_frameworks_base" remote="omnirom" revision="android-8.1" clone-depth="1" >
+        <linkfile src="core/java/android/content" dest="frameworks/base/core/java/android/content" />
+        <linkfile src="core/java/android/security" dest="frameworks/base/core/java/android/security" />
+    </project-->
+
+<!-- qcom -->
+    <project path="device/qcom/common" name="TeamWin/android_device_qcom_common" remote="github" revision="android-8.0" />
+
+<!-- busybox -->
+    <project path="external/busybox" name="omnirom/android_external_busybox" remote="github" revision="android-8.1" />
+
+</manifest>
